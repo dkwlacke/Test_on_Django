@@ -4,113 +4,104 @@
     <meta charset="UTF-8">
     <title>Главная</title>
 
-    <style>
+        <style>
+        @import url('https://fonts.googleapis.com/css2?family=Ubuntu+Mono&display=swap');
+
+        * {
+            font-family: "Ubuntu Mono", monospace;
+            background-color: #000;
+            color: #fff;
+            box-sizing: border-box;
+        }
+
         body {
             margin: 0;
             height: 100vh;
-            font-family: Arial, sans-serif;
-            background: linear-gradient(135deg, #5f9cff, #6fd6ff);
             display: flex;
             justify-content: center;
             align-items: center;
         }
 
-        .login-btn {
+        /* 🔹 Верхняя панель */
+        .top-bar {
             position: absolute;
             top: 20px;
             right: 20px;
+            display: flex;
+            gap: 10px;
+        }
 
-            padding: 10px 15px;
-            background: white;
-            color: #5f9cff;
-            border-radius: 8px;
+        .top-btn {
+            padding: 8px 14px;
+            border: 1px solid #fff;
             text-decoration: none;
-            font-weight: bold;
-            transition: 0.3s;
+            font-size: 14px;
+            transition: 0.2s;
         }
 
-        .login-btn:hover {
-            background: #f0f0f0;
-        }
-        .logout-btn {
-            position: absolute;
-            top: 20px;
-            right: 20px;
-
-            padding: 10px 10px;
-            background: white;
-            color: #5f9cff;
-            border-radius: 8px;
-            text-decoration: none;
-            font-weight: bold;
-            transition: 0.3s;
+        .top-btn:hover {
+            background: #fff;
+            color: #000;
         }
 
-        .register-btn {
-            position: absolute;
-            top: 20px;
-            right: 120px;
-
-            padding: 10px 15px;
-            background: white;
-            color: #5f9cff;
-            border-radius: 8px;
-            text-decoration: none;
-            font-weight: bold;
-            transition: 0.3s;
-        }
-
-
+        /* 🔹 Основной блок */
         .container {
-            background: white;
-            padding: 40px;
-            border-radius: 20px;
-            box-shadow: 0 15px 35px rgba(0,0,0,0.2);
+            max-width: 400px;
+            width: 100%;
             text-align: center;
-            width: 350px;
         }
 
         h1 {
             margin-bottom: 30px;
         }
 
+        h2 {
+            font-size: 16px;
+            margin-bottom: 20px;
+            opacity: 0.7;
+        }
+
+        /* 🔹 Ссылки */
         .links {
             display: flex;
             flex-direction: column;
             gap: 15px;
         }
 
-        a {
-            display: block;
-            padding: 12px;
-            border-radius: 10px;
+        .links a {
+            padding: 10px;
+            border: 1px solid #fff;
             text-decoration: none;
-            font-size: 18px;
-            background: #5f9cff;
-            color: white;
-            transition: 0.3s;
+            font-size: 16px;
+            transition: 0.2s;
         }
 
-        a:hover {
-            background: #4a7de0;
-            transform: translateY(-2px);
+        .links a:hover {
+            background: #fff;
+            color: #000;
         }
     </style>
 </head>
 
 <body>
+
+
+<div class="top-bar">
+    {% if request.user.is_authenticated %}
+        <span class="top-btn">{{ request.user }}</span>
+        <a href="logout" class="top-btn">Log out</a>
+    {% else %}
+        <a href="login" class="top-btn">Log in</a>
+        <a href="register" class="top-btn">Register</a>
+    {% endif %}
+</div>
+
 <div class="container">
     <h1>My test project on Django</h1>
-    {%if request.user.is_authenticated%}
-        <h2>{{request.user}}</h2>
-        <a href="logout" class="logout-btn">Log out</a>
-    {%else%}
-        <a href="login" class="login-btn">Log in</a>
-        <a href="register" class="register-btn">Register</a>
-    {%endif%}
+
     <div class="links">
         <a href="calc">Калькулятор</a>
-        <a href='get_db'>Список из БД</a>
+        <a href="get_db">Список из БД</a>
         <a href="find">Поиск</a>
     </div>
 </div>

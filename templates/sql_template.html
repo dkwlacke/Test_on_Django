@@ -1,15 +1,98 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ru">
 <head>
     <meta charset="UTF-8">
-    <Title>select</Title>
+    <title>Список</title>
+
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Ubuntu+Mono&display=swap');
+
+        * {
+            font-family: "Ubuntu Mono", monospace;
+            background-color: #000;
+            color: #fff;
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        /* 🔹 Кнопка назад */
+        .main-btn {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+
+            padding: 8px 14px;
+            border: 1px solid #fff;
+            text-decoration: none;
+            font-size: 14px;
+            transition: 0.2s;
+        }
+
+        .main-btn:hover {
+            background: #fff;
+            color: #000;
+        }
+
+        /* 🔹 Контейнер */
+        .container {
+            width: 400px;
+            text-align: center;
+        }
+
+        h1 {
+            margin-bottom: 20px;
+        }
+
+        /* 🔹 Список */
+        ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        li {
+            padding: 10px;
+            border-bottom: 1px solid #fff;
+            transition: 0.2s;
+        }
+
+        li:hover {
+            background: #fff;
+            color: #000;
+        }
+
+        /* 🔹 Пустой список */
+        .empty {
+            opacity: 0.6;
+            margin-top: 10px;
+        }
+    </style>
 </head>
+
 <body>
-    <h1>{{value}}</h1>
-    <ul>
-        {% for item in obj_list %}
-            <li>{{item}}</li>
-        {% endfor %}
-    </ul>
+
+<a href="/" class="main-btn">Main</a>
+
+<div class="container">
+    <h1>{{ value }}</h1>
+
+    {% if obj_list %}
+        <ul>
+            {% for item in obj_list %}
+                <li>{{ item }}</li>
+            {% endfor %}
+        </ul>
+    {% else %}
+        <div class="empty">Список пуст</div>
+    {% endif %}
+</div>
+
 </body>
 </html>

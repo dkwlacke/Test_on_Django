@@ -5,90 +5,124 @@
     <title>Search</title>
 
     <style>
+        @import url('https://fonts.googleapis.com/css2?family=Ubuntu+Mono&display=swap');
+
+        * {
+            font-family: "Ubuntu Mono", monospace;
+            background-color: #000;
+            color: #fff;
+            box-sizing: border-box;
+        }
+
         body {
             margin: 0;
             height: 100vh;
             display: flex;
             justify-content: center;
             align-items: center;
-            font-family: Arial, sans-serif;
-            background: linear-gradient(135deg, #74ebd5, #acb6e5);
         }
 
-        .container {
-            background: white;
-            padding: 40px;
-            border-radius: 15px;
-            box-shadow: 0 10px 25px rgba(0,0,0,0.2);
-            text-align: center;
-            width: 320px;
-        }
-
-        input {
-            width: 100%;
-            padding: 10px;
-            border-radius: 8px;
-            border: 1px solid #ccc;
-            margin-bottom: 15px;
-        }
+        /* 🔹 Кнопка назад */
         .main-btn {
             position: absolute;
             top: 20px;
-            right: 1000px;
+            left: 20px;
 
-            padding: 10px 15px;
-            background: white;
-            color: #5f9cff;
-            border-radius: 8px;
+            padding: 8px 14px;
+            border: 1px solid #fff;
             text-decoration: none;
-            font-weight: bold;
-            transition: 0.3s;
+            font-size: 14px;
+            transition: 0.2s;
         }
 
+        .main-btn:hover {
+            background: #fff;
+            color: #000;
+        }
+
+        /* 🔹 Контейнер */
+        .container {
+            width: 320px;
+            text-align: center;
+        }
+
+        h1 {
+            margin-bottom: 20px;
+        }
+
+        /* 🔹 Поле ввода */
+        input {
+            width: 100%;
+            padding: 8px 0;
+            border: none;
+            border-bottom: 1px solid #fff;
+            margin-bottom: 15px;
+            outline: none;
+            font-size: 16px;
+        }
+
+        input:focus {
+            border-bottom: 1px solid #6c63ff;
+        }
+
+        /* 🔹 Кнопка */
         button {
             width: 100%;
             padding: 10px;
-            border: none;
-            border-radius: 8px;
-            background: #6c63ff;
-            color: white;
+            border: 1px solid #fff;
+            background: transparent;
             cursor: pointer;
+            transition: 0.2s;
         }
 
+        button:hover {
+            background: #fff;
+            color: #000;
+        }
+
+        /* 🔹 Результаты */
         .results {
-            margin-top: 20px;
+            margin-top: 25px;
             text-align: left;
         }
 
         .results div {
-            padding: 8px;
-            background: #f3f3f3;
-            border-radius: 6px;
-            margin-bottom: 5px;
+            padding: 8px 0;
+            border-bottom: 1px solid #fff;
+            font-size: 14px;
+        }
+
+        .empty {
+            margin-top: 10px;
+            opacity: 0.6;
         }
     </style>
 </head>
 
 <body>
 
+<a href="/" class="main-btn">Main</a>
+
 <div class="container">
     <h1>Поиск человека</h1>
-    <a href="/" class="main-btn">Main</a>
+
     <form method="post">
         {% csrf_token %}
         <input type="text" name="search" placeholder="Введите имя человека">
         <button type="submit">Поиск</button>
     </form>
 
-<div class="results">
-    {% if result %}
-        {% for item in result %}
-            <p>{{ item.name }} {{item.surname}} {{item.age}}</p>
-        {% endfor %}
-    {% else %}
-        <p>Ничего не найдено</p>
-    {% endif %}
-</div>
+    <div class="results">
+        {% if request.method == "POST" %}
+            {% if result %}
+                {% for item in result %}
+                    <div>{{ item.name }} {{ item.surname }} — {{ item.age }}</div>
+                {% endfor %}
+            {% else %}
+                <div class="empty">Ничего не найдено</div>
+            {% endif %}
+        {% endif %}
+    </div>
 </div>
 
 </body>
