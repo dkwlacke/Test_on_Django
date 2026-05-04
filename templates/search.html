@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>Search</title>
+
+    <style>
+        body {
+            margin: 0;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-family: Arial, sans-serif;
+            background: linear-gradient(135deg, #74ebd5, #acb6e5);
+        }
+
+        .container {
+            background: white;
+            padding: 40px;
+            border-radius: 15px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+            text-align: center;
+            width: 320px;
+        }
+
+        input {
+            width: 100%;
+            padding: 10px;
+            border-radius: 8px;
+            border: 1px solid #ccc;
+            margin-bottom: 15px;
+        }
+        .main-btn {
+            position: absolute;
+            top: 20px;
+            right: 1000px;
+
+            padding: 10px 15px;
+            background: white;
+            color: #5f9cff;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: bold;
+            transition: 0.3s;
+        }
+
+        button {
+            width: 100%;
+            padding: 10px;
+            border: none;
+            border-radius: 8px;
+            background: #6c63ff;
+            color: white;
+            cursor: pointer;
+        }
+
+        .results {
+            margin-top: 20px;
+            text-align: left;
+        }
+
+        .results div {
+            padding: 8px;
+            background: #f3f3f3;
+            border-radius: 6px;
+            margin-bottom: 5px;
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="container">
+    <h1>Поиск человека</h1>
+    <a href="/" class="main-btn">Main</a>
+    <form method="post">
+        {% csrf_token %}
+        <input type="text" name="search" placeholder="Введите имя человека">
+        <button type="submit">Поиск</button>
+    </form>
+
+<div class="results">
+    {% if result %}
+        {% for item in result %}
+            <p>{{ item.name }} {{item.surname}} {{item.age}}</p>
+        {% endfor %}
+    {% else %}
+        <p>Ничего не найдено</p>
+    {% endif %}
+</div>
+</div>
+
+</body>
+</html>

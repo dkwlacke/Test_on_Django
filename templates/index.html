@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>Главная</title>
+
+    <style>
+        body {
+            margin: 0;
+            height: 100vh;
+            font-family: Arial, sans-serif;
+            background: linear-gradient(135deg, #5f9cff, #6fd6ff);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .login-btn {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+
+            padding: 10px 15px;
+            background: white;
+            color: #5f9cff;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: bold;
+            transition: 0.3s;
+        }
+
+        .login-btn:hover {
+            background: #f0f0f0;
+        }
+        .logout-btn {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+
+            padding: 10px 10px;
+            background: white;
+            color: #5f9cff;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: bold;
+            transition: 0.3s;
+        }
+
+        .register-btn {
+            position: absolute;
+            top: 20px;
+            right: 120px;
+
+            padding: 10px 15px;
+            background: white;
+            color: #5f9cff;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: bold;
+            transition: 0.3s;
+        }
+
+
+        .container {
+            background: white;
+            padding: 40px;
+            border-radius: 20px;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.2);
+            text-align: center;
+            width: 350px;
+        }
+
+        h1 {
+            margin-bottom: 30px;
+        }
+
+        .links {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        a {
+            display: block;
+            padding: 12px;
+            border-radius: 10px;
+            text-decoration: none;
+            font-size: 18px;
+            background: #5f9cff;
+            color: white;
+            transition: 0.3s;
+        }
+
+        a:hover {
+            background: #4a7de0;
+            transform: translateY(-2px);
+        }
+    </style>
+</head>
+
+<body>
+<div class="container">
+    <h1>My test project on Django</h1>
+    {%if request.user.is_authenticated%}
+        <h2>{{request.user}}</h2>
+        <a href="logout" class="logout-btn">Log out</a>
+    {%else%}
+        <a href="login" class="login-btn">Log in</a>
+        <a href="register" class="register-btn">Register</a>
+    {%endif%}
+    <div class="links">
+        <a href="calc">Калькулятор</a>
+        <a href='get_db'>Список из БД</a>
+        <a href="find">Поиск</a>
+    </div>
+</div>
+
+</body>
+</html>

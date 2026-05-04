@@ -1,0 +1,107 @@
+{% extends 'users/base.html' %}
+
+{% block title %}Create Account{% endblock %}
+
+{% block content %}
+    <h1>Create Account</h1>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Ubuntu+Mono:ital,wght@0,400;0,700;1,400;1,700&display=swap');
+
+        * {
+            font-family: "Ubuntu Mono", monospace;
+            font-weight: 400;
+            font-style: normal;
+            background-color: #000;
+            color: #fff;
+        }
+
+        .container {
+            padding-top: 10%;
+            max-width: 600px;
+            margin: 0 auto;
+            font-size: 24px;
+        }
+
+        button {
+            font-size: 18px;
+            min-width: 140px;
+            min-height: 40px;
+        }
+
+        .checkbox-form {
+            font-size: 14px;
+        }
+
+        .reg-form {
+            display: flex; flex-direction: column;
+            gap: 15px;
+        }
+
+        .form-group {
+            display: flex; flex-direction: column;
+        }
+
+        .form-group input {
+            all: unset;
+            border-bottom: 1px solid #fff;
+            margin-bottom: 10px; margin-top: 10px;
+            font-size: 18px;
+        }
+
+        .form-group input::placeholder {
+            font-size: 14px;
+        }
+
+        .reg-form button {
+            height: 40px;
+        }
+
+        .profile-section {
+            margin-bottom: 20px;
+        }
+
+        .address-box {
+            padding-top: 20px; padding-bottom: 20px;
+        }
+    </style>
+    <form method="post" class="reg-form">
+        {% csrf_token %}
+        <div class="form-group">
+            <label for="{{ form.first_name.id_for_label }}">First Name</label>
+            {{ form.first_name }}
+            {% if form.first_name.errors %}
+                <div class="error">{{ form.first_name.errors }}</div>
+            {% endif %}
+        </div>
+        <div class="form-group">
+            <label for="{{ form.last_name.id_for_label }}">Last Name</label>
+            {{ form.last_name }}
+            {% if form.last_name.errors %}
+                <div class="error">{{ form.last_name.errors }}</div>
+            {% endif %}
+        </div>
+        <div class="form-group">
+            <label for="{{ form.username.id_for_label }}">Username</label>
+            {{ form.username }}
+            {% if form.username.errors %}
+                <div class="error">{{ form.username.errors }}</div>
+            {% endif %}
+        </div>
+        <div class="form-group">
+            <label for="{{ form.password1.id_for_label }}">Password</label>
+            {{ form.password1 }}
+            {% if form.password1.errors %}
+                <div class="error">{{ form.password1.errors }}</div>
+            {% endif %}
+        </div>
+        <div class="form-group">
+            <label for="{{ form.password2.id_for_label }}">Confirm Password</label>
+            {{ form.password2 }}
+            {% if form.password2.errors %}
+                <div class="error">{{ form.password2.errors }}</div>
+            {% endif %}
+        </div>
+        <button type="submit">Create</button>
+        <a href="{% url 'main:login' %}" class="link">Already registered? Log in</a>
+    </form>
+{% endblock %}
